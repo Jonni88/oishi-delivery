@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import { isOpenNow } from '@/lib/time';
 import ProductMenuClient from '@/components/product-menu-client';
+import PromoSliderClient from '@/components/promo-slider-client';
 
 export const dynamic = 'force-dynamic';
 
