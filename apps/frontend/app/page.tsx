@@ -5,16 +5,10 @@ import { isOpenNow } from '@/lib/time';
 
 export const dynamic = 'force-dynamic';
 
-const featuredPlaceholders = [
-  { id: 'f1', name: 'Филадельфия классик', price: 329 },
-  { id: 'f2', name: 'Калифорния с креветкой', price: 349 },
-  { id: 'f3', name: 'Острый лосось', price: 299 },
-  { id: 'f4', name: 'Запечённый сет', price: 499 }
-];
-
 export default async function HomePage() {
   const settings = await prisma.settings.findFirst();
   const promotions = await prisma.promotion.findMany({ where: { isActive: true }, orderBy: { createdAt: 'desc' }, take: 6 });
+  const products = await prisma.product.findMany({ orderBy: [{ isPopular: 'desc' }, { createdAt: 'desc' }], take: 8 });
 
   const opening = settings?.openingTime ?? '10:00';
   const closing = settings?.closingTime ?? '23:00';
@@ -86,10 +80,10 @@ export default async function HomePage() {
 
         <section className="mb-4">
           <h3 className="mb-2 text-lg font-semibold">Популярное</h3>
-          <div className="grid grid-cols-2 gap-3">
-            {featuredPlaceholders.map((item) => (
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">
+            {products.map((item) => (
               <article key={item.id} className="rounded-2xl border border-white/10 bg-card p-3">
-                <div className="mb-2 h-20 rounded-xl bg-gradient-to-br from-white/10 to-white/5" />
+                <img src={item.image ?? '/menu/menu-01.jpg'} alt={item.name} className="mb-2 h-24 w-full rounded-xl object-cover" />
                 <p className="text-sm font-medium leading-tight">{item.name}</p>
                 <div className="mt-2 flex items-center justify-between">
                   <span className="text-sm font-semibold">{item.price} ₽</span>
@@ -101,8 +95,12 @@ export default async function HomePage() {
         </section>
 
         <section id="menu" className="rounded-2xl border border-white/10 bg-card p-4">
-          <h3 className="text-lg font-semibold mb-1">Меню</h3>
-          <p className="text-sm text-white/70">Меню скоро появится.</p>
+          <h3 className="text-lg font-semibold mb-2">Меню</h3>
+          {products.length === 0 ? (
+            <p className="text-sm text-white/70">Меню скоро появится.</p>
+          ) : (
+            <p className="text-sm text-white/70">В меню сейчас {products.length}+ позиций. Выбирай в карточках выше.</p>
+          )}
         </section>
       </div>
 
