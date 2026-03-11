@@ -1,9 +1,20 @@
 {
-  "name": "Oishi",
+  "name": "Oishi Sushi Delivery",
   "short_name": "Oishi",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0f0f0f",
   "theme_color": "#ff5a1f",
-  "icons": []
+  "icons": [
+    {
+      "src": "/logo/oishi-logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "/logo/oishi-logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
 }

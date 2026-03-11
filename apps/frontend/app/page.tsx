@@ -30,17 +30,23 @@ export default async function HomePage() {
         ];
 
   return (
-    <main className="min-h-screen bg-bg text-text pb-28">
-      <div className="mx-auto max-w-md px-4 pt-4">
+    <main className="min-h-screen bg-bg text-text pb-28 lg:pb-8">
+      <div className="mx-auto max-w-6xl px-4 pt-4 lg:px-6">
         <header className="mb-4 flex items-center justify-between">
-          <div>
-            <p className="text-xs uppercase tracking-[0.2em] opacity-60">Oishi Delivery</p>
-            <h1 className="text-3xl font-semibold leading-none mt-1">Oishi</h1>
+          <div className="flex items-center gap-3">
+            <img src="/logo/oishi-logo.jpg" alt="Oishi logo" className="h-12 w-12 rounded-xl object-cover" />
+            <div>
+              <p className="text-xs uppercase tracking-[0.2em] opacity-60">Oishi Delivery</p>
+              <h1 className="text-3xl font-semibold leading-none mt-1">Oishi</h1>
+            </div>
           </div>
           <Link href="/checkout" className="rounded-xl bg-accent px-4 py-2 text-sm font-medium text-white shadow-lg shadow-accent/30">
             Корзина
           </Link>
         </header>
+
+        <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px]">
+          <div>
 
         <section className="mb-3 rounded-2xl border border-white/10 bg-card p-3">
           <div className="mb-2 flex items-center justify-between text-sm">
@@ -67,7 +73,7 @@ export default async function HomePage() {
             <h3 className="text-lg font-semibold">Акции</h3>
             <span className="rounded-lg bg-accent/20 px-2 py-1 text-xs text-accent">Hot</span>
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
             {promoView.map((promo) => (
               <article key={promo.id} className="rounded-2xl border border-white/10 bg-card p-3">
                 <p className="text-xs text-accent">{promo.badge ?? 'Спецпредложение'}</p>
@@ -102,9 +108,31 @@ export default async function HomePage() {
             <p className="text-sm text-white/70">В меню сейчас {products.length}+ позиций. Выбирай в карточках выше.</p>
           )}
         </section>
+          </div>
+
+          <aside className="hidden lg:block">
+            <div className="sticky top-6 space-y-4">
+              <section className="rounded-2xl border border-white/10 bg-card p-4">
+                <h3 className="text-lg font-semibold mb-2">Статус ресторана</h3>
+                <p className={`inline-block rounded-full px-3 py-1 text-xs ${status.open ? 'bg-green-500/20 text-green-300' : 'bg-red-500/20 text-red-300'}`}>
+                  {status.open ? `Открыто до ${closing}` : `Закрыто до ${opening}`}
+                </p>
+                <p className="mt-2 text-sm text-white/70">Телефон: +79245961740</p>
+              </section>
+
+              <section className="rounded-2xl border border-white/10 bg-card p-4">
+                <h3 className="text-lg font-semibold mb-2">Корзина</h3>
+                <p className="text-sm text-white/70 mb-3">Выбрано 0 позиций</p>
+                <Link href="/checkout" className="inline-block w-full rounded-xl bg-accent px-4 py-3 text-center text-sm font-medium text-white">
+                  Перейти к оформлению
+                </Link>
+              </section>
+            </div>
+          </aside>
+        </div>
       </div>
 
-      <nav className="fixed bottom-4 left-1/2 z-20 w-[min(420px,calc(100%-24px))] -translate-x-1/2 rounded-2xl border border-white/10 bg-[#12151d]/95 px-4 py-3 backdrop-blur">
+      <nav className="fixed bottom-4 left-1/2 z-20 w-[min(420px,calc(100%-24px))] -translate-x-1/2 rounded-2xl border border-white/10 bg-[#12151d]/95 px-4 py-3 backdrop-blur lg:hidden">
         <div className="grid grid-cols-4 gap-2 text-center text-xs text-white/70">
           <button className="text-accent">🏠<div>Главная</div></button>
           <button>🧾<div>Каталог</div></button>
