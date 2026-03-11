@@ -6,6 +6,11 @@ import { isOpenNow } from '@/lib/time';
 
 export default async function HomePage() {
   const settings = await prisma.settings.findFirst();
+  const promotions = await prisma.promotion.findMany({
+    where: { isActive: true },
+    orderBy: { createdAt: 'desc' },
+    take: 4
+  });
   const opening = settings?.openingTime ?? '10:00';
   const closing = settings?.closingTime ?? '23:00';
   const status = isOpenNow(opening, closing);
@@ -44,18 +49,19 @@ export default async function HomePage() {
           <h3 className="text-xl font-semibold">Акции</h3>
           <span className="text-xs bg-accent/20 text-accent px-2 py-1 rounded-lg">Горячее</span>
         </div>
-        <div className="grid gap-3 md:grid-cols-2">
-          <article className="rounded-xl p-4 bg-gradient-to-r from-accent/30 to-accent/10 border border-accent/30">
-            <p className="text-sm opacity-80 mb-1">Только сегодня</p>
-            <h4 className="font-semibold mb-1">Сет дня −20%</h4>
-            <p className="text-sm opacity-80">Скидка на наборы при заказе от 2000 ₽</p>
-          </article>
-          <article className="rounded-xl p-4 bg-white/5 border border-white/10">
-            <p className="text-sm opacity-80 mb-1">Промокод</p>
-            <h4 className="font-semibold mb-1">OISHI10</h4>
-            <p className="text-sm opacity-80">Скидка 10% на первый заказ</p>
-          </article>
-        </div>
+        {promotions.length === 0 ? (
+          <p className="opacity-70 text-sm">Пока нет активных акций. Добавь их в админке через API.</p>
+        ) : (
+          <div className="grid gap-3 md:grid-cols-2">
+            {promotions.map((promo) => (
+              <article key={promo.id} className="rounded-xl p-4 bg-gradient-to-r from-accent/30 to-accent/10 border border-accent/30">
+                <p className="text-sm opacity-80 mb-1">{promo.badge ?? 'Спецпредложение'}</p>
+                <h4 className="font-semibold mb-1">{promo.title}{promo.discount ? ` −${promo.discount}%` : ''}</h4>
+                <p className="text-sm opacity-80">{promo.description ?? (promo.promoCode ? `Промокод: ${promo.promoCode}` : 'Подробности в карточке акции.')}</p>
+              </article>
+            ))}
+          </div>
+        )}
       </section>
 
       <section id="menu" className="card p-6">

@@ -3,10 +3,11 @@ import { prisma } from '@/lib/prisma';
 export const dynamic = 'force-dynamic';
 
 export default async function AdminPage() {
-  const [ordersCount, newOrders, sum] = await Promise.all([
+  const [ordersCount, newOrders, sum, promotionsCount] = await Promise.all([
     prisma.order.count(),
     prisma.order.count({ where: { status: 'новый' } }),
-    prisma.order.aggregate({ _sum: { total: true } })
+    prisma.order.aggregate({ _sum: { total: true } }),
+    prisma.promotion.count({ where: { isActive: true } })
   ]);
 
   return (
@@ -17,10 +18,11 @@ export default async function AdminPage() {
           <button className="btn-primary" type="submit">Выйти</button>
         </form>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="card p-4">Всего заказов: {ordersCount}</div>
         <div className="card p-4">Новые заказы: {newOrders}</div>
         <div className="card p-4">Сумма заказов: {sum._sum.total ?? 0} ₽</div>
+        <div className="card p-4">Активные акции: {promotionsCount}</div>
       </div>
     </main>
   );

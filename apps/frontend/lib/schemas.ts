@@ -36,3 +36,13 @@ export const settingsSchema = z.object({
 export const statusSchema = z.object({
   status: z.enum(['новый', 'подтвержден', 'готовится', 'готов', 'выдан', 'доставлен', 'отменен'])
 });
+
+export const promotionSchema = z.object({
+  title: z.string().min(2),
+  description: z.string().optional().nullable(),
+  badge: z.string().optional().nullable(),
+  promoCode: z.string().optional().nullable(),
+  discount: z.number().int().min(0).max(100).optional().nullable(),
+  isActive: z.boolean().default(true),
+  expiresAt: z.string().datetime().optional().nullable()
+});
