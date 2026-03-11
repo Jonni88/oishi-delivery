@@ -20,6 +20,8 @@ export const orderSchema = z.object({
   address: z.string().optional().nullable(),
   comment: z.string().optional().nullable(),
   paymentType: z.enum(['cash', 'transfer', 'terminal']),
+  isScheduled: z.boolean().optional().default(false),
+  scheduledAt: z.string().datetime().optional().nullable(),
   items: z.array(z.object({ productId: z.string(), quantity: z.number().int().min(1) })).min(1)
 });
 

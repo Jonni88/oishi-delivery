@@ -21,8 +21,24 @@ export async function POST(req: NextRequest) {
   const opening = settings?.openingTime ?? '10:00';
   const closing = settings?.closingTime ?? '23:00';
   const status = isOpenNow(opening, closing);
-  if (!status.open) {
-    return NextResponse.json({ code: 'RESTAURANT_CLOSED', message: `Сейчас закрыто. Откроемся в ${opening}` }, { status: 400 });
+
+  const requestedSchedule = parsed.data.scheduledAt ? new Date(parsed.data.scheduledAt) : null;
+  const isScheduled = Boolean(parsed.data.isScheduled || requestedSchedule);
+
+  if (!status.open && !isScheduled) {
+    return NextResponse.json({
+      code: 'RESTAURANT_CLOSED',
+      message: `Сейчас закрыто. Откроемся в ${opening}`,
+      details: 'Выберите время получения заказа.'
+    }, { status: 400 });
+  }
+
+  if (isScheduled && !requestedSchedule) {
+    return NextResponse.json({ code: 'VALIDATION_ERROR', message: 'Для отложенного заказа укажите scheduledAt' }, { status: 400 });
+  }
+
+  if (requestedSchedule && requestedSchedule.getTime() <= Date.now()) {
+    return NextResponse.json({ code: 'VALIDATION_ERROR', message: 'scheduledAt должен быть в будущем' }, { status: 400 });
   }
 
   const priceMap = new Map(products.map((p) => [p.id, p.price]));
@@ -37,6 +53,8 @@ export async function POST(req: NextRequest) {
       comment: parsed.data.comment,
       paymentType: parsed.data.paymentType,
       total,
+      isScheduled,
+      scheduledAt: requestedSchedule,
       items: {
         create: parsed.data.items.map((i) => ({
           productId: i.productId,

@@ -34,12 +34,15 @@ model Order {
   paymentType  String
   total        Int
   status       String      @default("новый")
+  isScheduled  Boolean     @default(false)
+  scheduledAt  DateTime?
   createdAt    DateTime    @default(now())
 
   items        OrderItem[]
 
   @@index([status])
   @@index([createdAt])
+  @@index([scheduledAt])
 }
 
 model OrderItem {
