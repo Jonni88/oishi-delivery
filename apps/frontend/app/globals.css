@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { @apply bg-bg text-text; }
+.card { @apply bg-card rounded-xl shadow-lg; }
+.btn { @apply rounded-xl px-4 py-2 transition; }
+.btn-primary { @apply btn bg-accent text-white hover:opacity-90; }

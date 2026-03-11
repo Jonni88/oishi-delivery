@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: oishi
+      POSTGRES_PASSWORD: oishi
+      POSTGRES_DB: oishi
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  frontend:
+    build:
+      context: ./apps/frontend
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://oishi:oishi@db:5432/oishi?schema=public
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+
+volumes:
+  pgdata:

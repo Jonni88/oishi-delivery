@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?
+  price       Int
+  pieces      Int?
+  image       String?
+  isPopular   Boolean  @default(false)
+  isNew       Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  orderItems  OrderItem[]
+}
+
+model Order {
+  id           String      @id @default(cuid())
+  customerName String
+  phone        String
+  deliveryType String
+  address      String?
+  comment      String?
+  paymentType  String
+  total        Int
+  status       String      @default("новый")
+  createdAt    DateTime    @default(now())
+
+  items        OrderItem[]
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  productId String
+  quantity  Int
+  price     Int
+
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model Settings {
+  id                 String  @id @default(cuid())
+  restaurantName     String  @default("Oishi")
+  phone              String  @default("+79245961740")
+  address            String?
+  openingTime        String  @default("10:00")
+  closingTime        String  @default("23:00")
+  deliveryMinAmount  Int     @default(0)
+  deliveryPrice      Int     @default(0)
+  pickupTimeMinutes  Int     @default(25)
+}

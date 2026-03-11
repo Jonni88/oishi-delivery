@@ -1,0 +1,8 @@
+node_modules
+.env
+.env.local
+.apps/frontend/.next
+apps/frontend/.next
+apps/frontend/node_modules
+apps/frontend/.env
+**/*.log
