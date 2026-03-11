@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 const items = [
   { name: 'Трио с кунжутом', slug: 'trio-s-kunzhutom', description: 'Набор роллов', price: 1500, image: '/menu/menu-01.jpg', isPopular: true },
-  { name: 'Сет 24 горячие', slug: 'set-24-goryachie', description: 'Горячий сет', price: 1300, image: '/menu/menu-02.jpg', isPopular: true },
+  { name: 'Сет 24 горячие', slug: 'set-24-goryachie', description: 'Горячий сет', price: 1300, image: '/menu/menu-02.jpg', isPopular: true, isSpicy: true },
   { name: 'Трио фирменное', slug: 'trio-firmennoe', description: 'Фирменный набор', price: 1500, image: '/menu/menu-03.jpg' },
   { name: 'Сет 72', slug: 'set-72', description: 'Филадельфия классик / унаги / сяке маки', price: 3200, image: '/menu/menu-04.jpg', isPopular: true },
   { name: 'Калифорния+', slug: 'kaliforniya-plus', description: 'Калифорния / унаги в кунжуте / каппа маки', price: 1200, image: '/menu/menu-05.jpg' },

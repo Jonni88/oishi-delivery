@@ -10,7 +10,8 @@ export const productSchema = z.object({
   pieces: z.number().int().min(0).optional().nullable(),
   image: z.string().url().optional().nullable(),
   isPopular: z.boolean().default(false),
-  isNew: z.boolean().default(false)
+  isNew: z.boolean().default(false),
+  isSpicy: z.boolean().default(false)
 });
 
 export const orderSchema = z.object({

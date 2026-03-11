@@ -14,9 +14,12 @@ export default async function AdminPage() {
     <main className="min-h-screen p-4 max-w-4xl mx-auto">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Admin / Dashboard</h1>
-        <form method="post" action="/api/admin/auth/logout">
-          <button className="btn-primary" type="submit">Выйти</button>
-        </form>
+        <div className="flex items-center gap-2">
+          <a href="/admin/products" className="btn-primary">Бейджи товаров</a>
+          <form method="post" action="/api/admin/auth/logout">
+            <button className="btn-primary" type="submit">Выйти</button>
+          </form>
+        </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="card p-4">Всего заказов: {ordersCount}</div>

@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { prisma } from '@/lib/prisma';
 import { isOpenNow } from '@/lib/time';
+import ProductMenuClient from '@/components/product-menu-client';
 
 export const dynamic = 'force-dynamic';
 
@@ -68,19 +69,7 @@ export default async function HomePage() {
 
             <section id="menu" className="mb-4">
               <h3 className="mb-2 text-lg font-semibold">Меню</h3>
-              <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">
-                {products.map((item) => (
-                  <article key={item.id} className="rounded-2xl border border-black/5 bg-white p-3 shadow-sm hover:shadow-md transition">
-                    <img src={item.image ?? '/menu/menu-01.jpg'} alt={item.name} className="mb-2 h-28 w-full rounded-xl object-cover" />
-                    <p className="text-sm font-medium leading-tight min-h-[36px]">{item.name}</p>
-                    <p className="mt-1 text-xs text-black/60 line-clamp-2">{item.description}</p>
-                    <div className="mt-2 flex items-center justify-between">
-                      <span className="text-base font-semibold">{item.price} ₽</span>
-                      <button className="rounded-lg bg-[#ff5a1f] px-2 py-1 text-xs text-white">+ В корзину</button>
-                    </div>
-                  </article>
-                ))}
-              </div>
+              <ProductMenuClient products={products} />
             </section>
           </div>
 

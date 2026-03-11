@@ -18,6 +18,7 @@ model Product {
   image       String?
   isPopular   Boolean  @default(false)
   isNew       Boolean  @default(false)
+  isSpicy     Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
