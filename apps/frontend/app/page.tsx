@@ -62,6 +62,15 @@ export default async function HomePage() {
           }))}
         />
 
+        {(settings?.acceptOrders === false || settings?.statusMessage) && (
+          <section className={`mb-4 rounded-2xl border px-4 py-3 ${settings?.acceptOrders === false ? 'border-red-200 bg-red-50 text-red-800' : 'border-amber-200 bg-amber-50 text-amber-800'}`}>
+            <p className="text-sm font-semibold">
+              {settings?.acceptOrders === false ? 'Сегодня заказы временно не принимаются' : 'Информация по режиму работы'}
+            </p>
+            {settings?.statusMessage && <p className="mt-1 text-sm">{settings.statusMessage}</p>}
+          </section>
+        )}
+
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px]">
           <div>
 
