@@ -21,10 +21,12 @@ export default async function HomePage() {
   return (
     <main className="min-h-screen pb-24 lg:pb-8">
       <div className="mx-auto max-w-6xl px-4 pt-4 lg:px-6">
-        <header className="mb-3 rounded-2xl border border-black/10 bg-white px-4 py-4 shadow-sm sm:px-5 sm:py-5">
-          <div className="flex flex-col items-center text-center">
-            <img src="/logo/oishi-logo.jpg" alt="Oishi logo" className="h-24 w-24 rounded-2xl object-cover ring-1 ring-black/10 sm:h-28 sm:w-28" />
-            <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-black/45">Oishi</p>
+        <header className="relative mb-3 overflow-hidden rounded-2xl border border-black/10 px-4 py-5 shadow-sm sm:px-5 sm:py-6">
+          <div className="absolute inset-0 bg-[url('/logo/oishi-logo.jpg')] bg-cover bg-center opacity-[0.18]" />
+          <div className="absolute inset-0 bg-white/85 backdrop-blur-[1px]" />
+
+          <div className="relative flex flex-col items-center text-center">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-black/55">Oishi</p>
             <h1 className="mt-1 text-lg font-semibold leading-tight sm:text-2xl">Доставка суши в Олекминске</h1>
 
             <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
