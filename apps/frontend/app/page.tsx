@@ -85,13 +85,7 @@ export default async function HomePage() {
                 <p className="mt-2 text-sm text-black/60">Быстрая доставка по городу</p>
               </section>
 
-              <section className="rounded-2xl border border-black/5 bg-white p-4">
-                <h3 className="text-lg font-semibold mb-2">Корзина</h3>
-                <p className="text-sm text-black/60 mb-3">Добавь товары и оформи за 30–40 секунд.</p>
-                <Link href="/checkout" className="inline-block w-full rounded-xl bg-[#E10600] px-4 py-3 text-center text-sm font-medium text-white">
-                  Перейти к оформлению
-                </Link>
-              </section>
+              <CartSidebarClient products={products} />
             </div>
           </aside>
         </div>
