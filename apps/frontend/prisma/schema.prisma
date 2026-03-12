@@ -67,6 +67,8 @@ model Settings {
   deliveryMinAmount  Int     @default(0)
   deliveryPrice      Int     @default(0)
   pickupTimeMinutes  Int     @default(25)
+  acceptOrders       Boolean @default(true)
+  statusMessage      String?
 }
 
 model Promotion {

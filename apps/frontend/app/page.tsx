@@ -64,19 +64,6 @@ export default async function HomePage() {
 
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px]">
           <div>
-            <section className="mb-3 rounded-2xl border border-black/5 bg-white p-3">
-              <div className="mb-2 flex items-center justify-between text-sm">
-                <span className="font-medium">+79245961740</span>
-                <span className={`rounded-full px-2 py-1 text-xs ${status.open ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-                  {status.open ? `🟢 Открыто до ${closing}` : `🔴 Закрыто до ${opening}`}
-                </span>
-              </div>
-              <div className="inline-flex rounded-xl bg-black/5 p-1 text-sm">
-                <button className="rounded-lg bg-[#E10600] px-4 py-2 text-white">Доставка</button>
-                <button className="px-4 py-2 text-black/60">Самовывоз</button>
-              </div>
-            </section>
-
 
             <PromoSliderClient promos={promotions} />
 
@@ -90,10 +77,10 @@ export default async function HomePage() {
             <div className="sticky top-6 space-y-4">
               <section className="rounded-2xl border border-black/5 bg-white p-4">
                 <h3 className="text-lg font-semibold mb-2">Статус ресторана</h3>
-                <p className={`inline-block rounded-full px-3 py-1 text-xs ${status.open ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-                  {status.open ? `Открыто до ${closing}` : `Закрыто до ${opening}`}
+                <p className={`inline-block rounded-full px-3 py-1 text-xs ${settings?.acceptOrders === false ? 'bg-red-100 text-red-700' : status.open ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                  {settings?.acceptOrders === false ? 'Заказы временно не принимаются' : status.open ? `Открыто до ${closing}` : `Закрыто до ${opening}`}
                 </p>
-                <p className="mt-2 text-sm text-black/60">Быстрая доставка по городу</p>
+                <p className="mt-2 text-sm text-black/60">{settings?.statusMessage ?? 'Быстрая доставка по городу'}</p>
               </section>
 
               <CartSidebarClient products={products} />

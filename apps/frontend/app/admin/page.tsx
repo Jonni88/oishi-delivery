@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma';
+import AdminStatusSettingsForm from '@/components/admin-status-settings-form';
 
 export const dynamic = 'force-dynamic';
 
@@ -27,6 +28,8 @@ export default async function AdminPage() {
         <div className="card p-4">Сумма заказов: {sum._sum.total ?? 0} ₽</div>
         <div className="card p-4">Активные акции: {promotionsCount}</div>
       </div>
+
+      <AdminStatusSettingsForm />
     </main>
   );
 }

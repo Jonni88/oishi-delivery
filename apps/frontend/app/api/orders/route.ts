@@ -22,6 +22,13 @@ export async function POST(req: NextRequest) {
   const closing = settings?.closingTime ?? '23:00';
   const status = isOpenNow(opening, closing);
 
+  if (settings?.acceptOrders === false) {
+    return NextResponse.json({
+      code: 'ORDERS_PAUSED',
+      message: settings.statusMessage || 'Сегодня заказы временно не принимаются.'
+    }, { status: 400 });
+  }
+
   const requestedSchedule = parsed.data.scheduledAt ? new Date(parsed.data.scheduledAt) : null;
   const isScheduled = Boolean(parsed.data.isScheduled || requestedSchedule);
 

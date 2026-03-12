@@ -33,7 +33,9 @@ export const settingsSchema = z.object({
   closingTime: z.string().regex(/^\d{2}:\d{2}$/),
   deliveryMinAmount: z.number().int().min(0),
   deliveryPrice: z.number().int().min(0),
-  pickupTimeMinutes: z.number().int().min(1)
+  pickupTimeMinutes: z.number().int().min(1),
+  acceptOrders: z.boolean().optional().default(true),
+  statusMessage: z.string().optional().nullable()
 });
 
 export const statusSchema = z.object({
