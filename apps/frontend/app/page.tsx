@@ -5,6 +5,7 @@ import { isOpenNow } from '@/lib/time';
 import ProductMenuClient from '@/components/product-menu-client';
 import PromoSliderClient from '@/components/promo-slider-client';
 import CartSidebarClient from '@/components/cart-sidebar-client';
+import HeroAutoplayBanners from '@/components/hero-autoplay-banners';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,16 +21,46 @@ export default async function HomePage() {
   return (
     <main className="min-h-screen pb-24 lg:pb-8">
       <div className="mx-auto max-w-6xl px-4 pt-4 lg:px-6">
-        <header className="mb-4 flex items-center justify-between rounded-2xl bg-white p-3 shadow-sm border border-black/5">
-          <div className="flex items-center gap-3">
-            <img src="/logo/oishi-logo.jpg" alt="Oishi logo" className="h-12 w-12 rounded-xl object-cover" />
-            <div>
-              <p className="text-xs uppercase tracking-[0.2em] text-black/50">Oishi Delivery</p>
-              <h1 className="text-3xl font-semibold leading-none mt-1">Oishi</h1>
+        <header className="mb-4 rounded-2xl border border-black/5 bg-white p-3 shadow-sm">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <img src="/logo/oishi-logo.jpg" alt="Oishi logo" className="h-12 w-12 rounded-xl object-cover" />
+              <div>
+                <h1 className="text-xl font-semibold leading-none sm:text-2xl">Доставка суши в Олекминске</h1>
+                <p className="mt-1 text-sm text-black/60">{settings?.phone ?? '+79245961740'}</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <a
+                href={`https://wa.me/${(settings?.phone ?? '+79245961740').replace(/\D/g, '')}`}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-xl border border-black/10 px-3 py-2 text-sm font-medium hover:bg-black/5"
+              >
+                Написать в WhatsApp
+              </a>
+              <a
+                href="https://max.ru"
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-xl border border-black/10 px-3 py-2 text-sm font-medium hover:bg-black/5"
+              >
+                Написать в MAX
+              </a>
+              <Link href="/checkout" className="btn-primary text-sm font-medium">Корзина</Link>
             </div>
           </div>
-          <Link href="/checkout" className="btn-primary text-sm font-medium">Корзина</Link>
         </header>
+
+        <HeroAutoplayBanners
+          banners={promotions.slice(0, 4).map((p, i) => ({
+            id: p.id,
+            title: p.title,
+            subtitle: p.description ?? 'Лучшие роллы и сеты с быстрой доставкой по Олекминску',
+            cta: i === 0 ? 'Заказать роллы' : 'Смотреть меню',
+          }))}
+        />
 
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px]">
           <div>
@@ -46,28 +77,8 @@ export default async function HomePage() {
               </div>
             </section>
 
-            <section className="mb-4 rounded-2xl border border-black/5 bg-white p-5">
-              <p className="mb-1 text-xs uppercase tracking-wider text-[#E10600]">Свежие роллы каждый день</p>
-              <h2 className="text-3xl font-semibold leading-tight">Суши и роллы Oishi</h2>
-              <p className="mt-2 text-sm text-black/60">От «хочу есть» до «оплачено» — самым коротким и вкусным путем.</p>
-              <a href="#menu" className="mt-3 inline-block rounded-xl bg-[#E10600] px-4 py-2 text-sm font-medium text-white">Заказать вкусно</a>
-            </section>
 
-            <section className="mb-4">
-              <div className="mb-2 flex items-center justify-between">
-                <h3 className="text-lg font-semibold">Акции</h3>
-                <span className="rounded-lg bg-orange-100 px-2 py-1 text-xs text-[#E10600]">Hot</span>
-              </div>
-              <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
-                {promotions.map((promo) => (
-                  <article key={promo.id} className="rounded-2xl border border-black/5 bg-white p-3">
-                    <p className="text-xs text-[#E10600]">{promo.badge ?? 'Спецпредложение'}</p>
-                    <h4 className="mt-1 text-sm font-semibold leading-snug">{promo.title}{promo.discount ? ` −${promo.discount}%` : ''}</h4>
-                    <p className="mt-1 text-xs text-black/60">{promo.description ?? (promo.promoCode ? `Промокод: ${promo.promoCode}` : 'Подробности внутри акции')}</p>
-                  </article>
-                ))}
-              </div>
-            </section>
+            <PromoSliderClient promos={promotions} />
 
             <section id="menu" className="mb-4">
               <h3 className="mb-2 text-lg font-semibold">Меню</h3>
