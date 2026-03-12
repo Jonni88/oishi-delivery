@@ -26,12 +26,14 @@ export default async function HomePage() {
           <div className="absolute inset-0 bg-white/85 backdrop-blur-[1px]" />
 
           <div className="relative flex flex-col items-center text-center">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-black/55">Oishi</p>
+            <div className="mb-1 flex h-12 w-44 items-center justify-center rounded-xl bg-white/70 ring-1 ring-black/10">
+              <img src="/logo/oishi-logo.jpg" alt="Oishi logo" className="h-10 w-40 object-contain" />
+            </div>
             <h1 className="mt-1 text-lg font-semibold leading-tight sm:text-2xl">Доставка суши в Олекминске</h1>
 
             <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
               <a href={`tel:${(settings?.phone ?? '+79245961740').replace(/\s/g, '')}`} className="rounded-xl border border-black/10 px-3 py-2 text-sm font-medium text-black/80 hover:bg-black/[0.03]">
-                {settings?.phone ?? '+79245961740'}
+                Позвонить
               </a>
               <a
                 href={`https://wa.me/${(settings?.phone ?? '+79245961740').replace(/\D/g, '')}`}
