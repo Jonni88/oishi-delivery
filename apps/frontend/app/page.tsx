@@ -21,35 +21,27 @@ export default async function HomePage() {
   return (
     <main className="min-h-screen pb-24 lg:pb-8">
       <div className="mx-auto max-w-6xl px-4 pt-4 lg:px-6">
-        <header className="mb-4 rounded-2xl border border-black/5 bg-white p-3 shadow-sm">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <img src="/logo/oishi-logo.jpg" alt="Oishi logo" className="h-12 w-12 rounded-xl object-cover" />
+        <header className="mb-4 overflow-hidden rounded-2xl border border-[#2c0f45] bg-[#2a0d42] text-white shadow-sm">
+          <div className="flex flex-wrap items-start justify-between gap-3 p-3 sm:p-4">
+            <div className="flex items-start gap-3">
+              <img src="/logo/oishi-logo.jpg" alt="Oishi logo" className="h-12 w-12 rounded-lg object-cover" />
               <div>
-                <h1 className="text-xl font-semibold leading-none sm:text-2xl">Доставка суши в Олекминске</h1>
-                <p className="mt-1 text-sm text-black/60">{settings?.phone ?? '+79245961740'}</p>
+                <h1 className="text-base font-semibold uppercase tracking-wide sm:text-lg">Доставка суши в Олекминске</h1>
+                <p className="mt-1 text-sm font-semibold">{settings?.phone ?? '+79245961740'}</p>
+                <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-white/85 underline underline-offset-2">
+                  <a href={`https://wa.me/${(settings?.phone ?? '+79245961740').replace(/\D/g, '')}`} target="_blank" rel="noreferrer">
+                    Написать в WhatsApp
+                  </a>
+                  <a href="https://max.ru" target="_blank" rel="noreferrer">
+                    Написать в MAX
+                  </a>
+                </div>
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
-              <a
-                href={`https://wa.me/${(settings?.phone ?? '+79245961740').replace(/\D/g, '')}`}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-xl border border-black/10 px-3 py-2 text-sm font-medium hover:bg-black/5"
-              >
-                Написать в WhatsApp
-              </a>
-              <a
-                href="https://max.ru"
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-xl border border-black/10 px-3 py-2 text-sm font-medium hover:bg-black/5"
-              >
-                Написать в MAX
-              </a>
-              <Link href="/checkout" className="btn-primary text-sm font-medium">Корзина</Link>
-            </div>
+            <Link href="/checkout" className="rounded-lg bg-[#e10600] px-4 py-2 text-sm font-semibold text-white hover:opacity-90">
+              Корзина
+            </Link>
           </div>
         </header>
 

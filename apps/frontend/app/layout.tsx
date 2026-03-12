@@ -1,5 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import { Montserrat } from 'next/font/google';
 
 export const metadata: Metadata = {
   title: 'Oishi — доставка суши',
@@ -10,10 +11,12 @@ export const metadata: Metadata = {
   }
 };
 
+const montserrat = Montserrat({ subsets: ['latin', 'cyrillic'] });
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru">
-      <body>{children}</body>
+      <body className={montserrat.className}>{children}</body>
     </html>
   );
 }
