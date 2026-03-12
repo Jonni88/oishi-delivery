@@ -21,18 +21,14 @@ export default async function HomePage() {
   return (
     <main className="min-h-screen pb-24 lg:pb-8">
       <div className="mx-auto max-w-6xl px-4 pt-4 lg:px-6">
-        <header className="mb-3 rounded-2xl border border-black/10 bg-white px-4 py-3 shadow-sm sm:px-5 sm:py-4">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <img src="/logo/oishi-logo.jpg" alt="Oishi logo" className="h-12 w-12 rounded-xl object-cover ring-1 ring-black/10" />
-              <div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-black/45">Oishi</p>
-                <h1 className="text-lg font-semibold leading-tight sm:text-xl">Доставка суши в Олекминске</h1>
-              </div>
-            </div>
+        <header className="mb-3 rounded-2xl border border-black/10 bg-white px-4 py-4 shadow-sm sm:px-5 sm:py-5">
+          <div className="flex flex-col items-center text-center">
+            <img src="/logo/oishi-logo.jpg" alt="Oishi logo" className="h-24 w-24 rounded-2xl object-cover ring-1 ring-black/10 sm:h-28 sm:w-28" />
+            <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-black/45">Oishi</p>
+            <h1 className="mt-1 text-lg font-semibold leading-tight sm:text-2xl">Доставка суши в Олекминске</h1>
 
-            <div className="flex items-center gap-2">
-              <a href={`tel:${(settings?.phone ?? '+79245961740').replace(/\s/g, '')}`} className="hidden rounded-xl border border-black/10 px-3 py-2 text-sm font-medium text-black/80 hover:bg-black/[0.03] sm:inline-flex">
+            <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
+              <a href={`tel:${(settings?.phone ?? '+79245961740').replace(/\s/g, '')}`} className="rounded-xl border border-black/10 px-3 py-2 text-sm font-medium text-black/80 hover:bg-black/[0.03]">
                 {settings?.phone ?? '+79245961740'}
               </a>
               <a
@@ -42,7 +38,7 @@ export default async function HomePage() {
                 className="inline-flex h-10 items-center justify-center rounded-xl border border-black/10 px-3 text-sm font-medium text-black/80 hover:bg-black/[0.03]"
                 aria-label="WhatsApp"
               >
-                WA
+                Написать в WhatsApp
               </a>
               <a
                 href="https://max.ru"
@@ -51,24 +47,12 @@ export default async function HomePage() {
                 className="inline-flex h-10 items-center justify-center rounded-xl border border-black/10 px-3 text-sm font-medium text-black/80 hover:bg-black/[0.03]"
                 aria-label="MAX"
               >
-                MAX
+                Написать в MAX
               </a>
               <Link href="/checkout" className="rounded-xl bg-[#E10600] px-4 py-2 text-sm font-semibold text-white hover:opacity-90">
                 Корзина
               </Link>
             </div>
-          </div>
-
-          <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-black/55 sm:hidden">
-            <a href={`tel:${(settings?.phone ?? '+79245961740').replace(/\s/g, '')}`} className="underline underline-offset-2">
-              {settings?.phone ?? '+79245961740'}
-            </a>
-            <a href={`https://wa.me/${(settings?.phone ?? '+79245961740').replace(/\D/g, '')}`} target="_blank" rel="noreferrer" className="underline underline-offset-2">
-              Написать в WhatsApp
-            </a>
-            <a href="https://max.ru" target="_blank" rel="noreferrer" className="underline underline-offset-2">
-              Написать в MAX
-            </a>
           </div>
         </header>
 
