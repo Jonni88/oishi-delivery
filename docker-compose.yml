@@ -18,6 +18,8 @@ services:
     environment:
       DATABASE_URL: postgresql://oishi:oishi@db:5432/oishi?schema=public
       NODE_ENV: production
+      ADMIN_LOGIN: admin
+      ADMIN_PASSWORD: oishi2026!
     ports:
       - "3000:3000"
 
